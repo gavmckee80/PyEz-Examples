@@ -1,0 +1,28 @@
+---
+
+ChassisHwTable:
+  rpc: get-chassis-inventory
+  item: //chassis-inventory/chassis
+  key: 
+      - name
+      - serial-number
+      - description
+  view: ChassisView
+
+ChassisView:
+  fields:
+    modules: _ChassisModuleTable
+
+_ChassisModuleTable:
+  item: chassis-module
+  view: _ChassisModuleView
+
+_ChassisModuleView:
+  fields:
+    name: name
+    version: version
+    partnum: part-number
+    sn: serial-number
+    description: description
+    cleicode: cleicode
+    model: model-number

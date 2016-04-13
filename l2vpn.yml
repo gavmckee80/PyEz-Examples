@@ -1,0 +1,74 @@
+---
+L2VPNTable:
+  rpc: get-l2vpn-connection-information
+  args:
+    extensive: True
+  item: instance
+  key: instance-name
+  view: L2VPNView
+
+L2VPNView:
+  fields:
+    site: _L2VPNSiteTable
+
+_L2VPNSiteTable:
+  item: reference-site
+  key: local-site-id
+  view: _L2VPNSiteView
+
+_L2VPNSiteView:
+  fields:
+    local_site_id: local-site-id
+    local_int_count: num-local-interfaces
+    int_up_count: num-local-interfaces-up
+    interfaces: _L2VPNInterfaceTable
+    connection: _L2VPNConnectionTable
+  groups:
+    labelblock: label-block 
+
+  fields_labelblock:
+    base: label-block-base
+    offset: label-block-offset
+    size: label-block-size
+    range: label-block-range
+    preference: label-block-preference
+    status_vector: label-block-status-vector
+
+
+_L2VPNInterfaceTable:
+  item: interface
+  key: interface-name 
+  view: _L2VPNInterfaceView
+
+_L2VPNInterfaceView:
+  fields:
+    interface: interface-name
+    interface_id: interface-id
+    description: interface-description
+    flags: interface-flags
+
+
+_L2VPNConnectionTable:
+  item: connection
+  key: connection-id
+  view: _L2VPNConnectionView
+
+_L2VPNConnectionView:
+  fields:
+    id: connection-id
+    type: connection-type
+    status: connection-status
+    remote_pe: remote-pe
+    control_word: control-word
+    inbound_label: inbound-label
+    outbound_label: outbound-label
+  groups: 
+     interface: local-interface 
+
+  fields_interface:
+    interface: interface-name
+    status: interface-status
+    encapsulation: interface-encapsulation
+    description: interface-description
+
+

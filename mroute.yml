@@ -1,0 +1,26 @@
+---
+MulticastRouteTable:
+  rpc: get-multicast-route-information
+  args: 
+   active: True
+  args_key: group 
+  item: route-family/multicast-route
+  key: multicast-source-address
+  view: MulticastRouteView
+
+MulticastRouteView:
+  fields:
+   group: multicast-group-address
+   source: multicast-source-address
+   src_prefix_len: multicast-source-prefix-length
+   upstream_interface: upstream-interface-name
+   downstream_interfaces: _DnStreamInterfaceTable
+
+_DnStreamInterfaceTable:
+  item: downstream-interface-names
+  key: interface-name
+  view: _DnStreamInterfaceView
+
+_DnStreamInterfaceView:
+  fields:
+   interface: interface-name
