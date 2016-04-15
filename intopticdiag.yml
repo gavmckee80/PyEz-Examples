@@ -20,3 +20,21 @@ PhyPortDiagView:
     tx_optic_power : laser-output-power-dbm
     module_temperature : module-temperature
     module_voltage : module-voltage
+
+PhyPortDiag40gView:
+  fields:
+    module_temperature: optics-diagnostics/module-temperature
+    module_voltage: optics-diagnostics/module-voltage
+    lane_tbl: _LaneTable
+
+_LaneTable:
+  item: optics-diagnostics/optics-diagnostics-lane-values
+  key: lane-index
+  view: _LaneViewTable
+
+_LaneViewTable:
+  fields:
+    lane_index: lane-index
+    bias_current: laser-bias-current
+    rx_power: laser-rx-optical-power
+    rx_power_dbm: laser-rx-optical-power-dbm
