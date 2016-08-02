@@ -1,0 +1,39 @@
+### ------------------------------------------------------
+### show route <destination>
+### ------------------------------------------------------
+
+RouteTable:
+  rpc: get-route-information
+  args_key: destination
+  item: route-table
+  key: table-name
+  view: RouteTableView
+
+RouteTableView:
+  fields:
+    table: table-name
+    destination_count: destination-count
+    total_route_count: total-route-count
+    total_active: active-route-count
+    holddown_count: holdown-route-count
+    hidden_count: hidden-route-count
+    rt_entry_tbl: _RouteEntryTable
+
+_RouteEntryTable:
+  item: rt
+  key: rt-destination
+  view: _RouteEntryView
+
+_RouteEntryView:
+  groups:
+    entry: rt-entry
+  fields_entry:
+    # fields taken from the group 'entry'
+    protocol: protocol-name
+    via: nh/via | nh/nh-local-interface
+    lsp: nh/lsp-name
+    age: { age/@seconds : int }
+    nexthop: nh/to
+    nh_table: nh/nh-table
+
+
