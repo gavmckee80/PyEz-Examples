@@ -17,3 +17,18 @@ for x in rt.xml.xpath('route-table'):
       if z.text != '219.0.0.0/9':             #here we are testing using a randomly choosen prefix
         y.getparent().remove(y)
         print tblname[0], z.text
+
+
+import random
+
+for table in rt.xml.xpath('route-table'):
+  tblname = [tn.text for tn in table.findall('table-name')]
+  prefix_list = []
+  for route in table.findall('rt'):
+    for dest in route.findall('rt-destination'):
+      prefix_list.append(dest.text)
+      
+  # generate a random int based on the total number of prefixes in the list
+  # this will be the total number of route removed from the table
+  x = random.randint(1,len(prefix_list))  
+  
