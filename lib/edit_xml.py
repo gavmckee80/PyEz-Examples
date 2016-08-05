@@ -31,4 +31,7 @@ for table in rt.xml.xpath('route-table'):
   # generate a random int based on the total number of prefixes in the list
   # this will be the total number of route removed from the table
   x = random.randint(1,len(prefix_list))  
-  
+
+for table in pre_xml.xml.xpath('route-table'):
+  if table.xpath('table-name')[0].text == post_xml.xml.xpath('route-table/table-name')[0].text:
+    print  table.xpath('table-name')[0].text, [x.text for x in table.xpath('rt/rt-destination')] 
