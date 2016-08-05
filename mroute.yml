@@ -5,7 +5,7 @@ MulticastRouteTable:
    active: True
   args_key: group 
   item: route-family/multicast-route
-  key: multicast-source-address
+  key: [multicast-group, multicast-source-address]
   view: MulticastRouteView
 
 MulticastRouteView:
