@@ -92,4 +92,21 @@ check = RouteTableCheck(pre_rt.xml,post_rt.xml)
 print "INFO: Checking if routes are missing post change...\n", check.check_missing()
 
 
+def format_header(xml):
+	# Header output should look something like this
+	# inet.0: 38 destinations, 38 routes (38 active, 0 holddown, 0 hidden)
+	# + = Active Route, - = Last Active, * = Both
+	header = '{table_name}: {destination_count} destinations, {total_route_count} routes, ({active_route_count} active, {holddown_route_count} holddown, {hidden_route_count} hidden)'
+	legend = '+ = Active Route, - = Last Active, * = Both'
 
+	for x in rt.xml.xpath('route-table'):
+    	print header.format(table_name=x.xpath('table-name')[0].text, 
+    		destination_count=x.xpath('destination-count')[0].text, 
+    		total_route_count=x.xpath('total-route-count')[0].text, 
+    		active_route_count=x.xpath('active-route-count')[0].text, 
+    		holddown_route_count=x.xpath('holddown-route-count')[0].text,
+    		hidden_route_count=x.xpath('hidden-route-count')[0].text)
+		print legend
+
+
+	return table_header
