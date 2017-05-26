@@ -1,4 +1,5 @@
 # Writing some code to allow us to modify an xml reponse to unit test the code
+#just some ideas
 
 # to remove an entire route table from an XML file the following code looks good
 for x in rt.xml.xpath('route-table'):
